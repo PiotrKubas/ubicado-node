@@ -17,8 +17,6 @@ const app = express()
 app.get('/', (req,res) => {
     res.send('Connected to DB')
     
-    } )
-    
 })
 
 app.listen(port)
