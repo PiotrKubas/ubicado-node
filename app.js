@@ -1,11 +1,21 @@
 const express = require('express')
 const port = process.env.PORT || 3000
+const mongoClient = require('mongodb').MongoClient
 
+const url = process.env.MONGODB_URI
+
+mongoClient.connect(url, {}, (error, client) =>{
+    if(error)
+        console.log('Cant connect to DB')
+    
+    console.log('Connected to DB')
+
+} )
 
 const app = express()
 
 app.get('/', (req,res) => {
-    res.send('kiedy idziemy na drwala?')
+    res.send('tak tak byczku?')
 })
 
 app.listen(port)
