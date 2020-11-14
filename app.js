@@ -10,10 +10,10 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 
 const app = express()
 
-app.get('/', (req,res) => {
+app.get('/', async (req,res) => {
 
         client.connect(err => {
-            const collection = client.db("ubicado").collection("users").insertOne({
+            await client.db("ubicado").collection("users").add({
                 name: 'Jony'
             })
             res.send("Inserted")
