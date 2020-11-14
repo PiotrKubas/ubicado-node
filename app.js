@@ -15,11 +15,7 @@ client.connect(err => {
 const app = express()
 
 app.get('/', (req,res) => {
-    mongoClient.connect(url, {}, (error, client) =>{
-        if(error){
-            res.send(error)
-        }
-        else res.send('Connected to DB')
+    res.send('Connected to DB')
     
     } )
     
