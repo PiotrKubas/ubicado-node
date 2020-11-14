@@ -2,7 +2,8 @@ const express = require('express')
 const port = process.env.PORT || 3000
 const mongoClient = require('mongodb').MongoClient
 
-const url = process.env.MONGODB_URI
+const url = "mongodb+srv://admin:bxzPfHKYklnE1XQS@cluster0.nvx90.mongodb.net/Cluster0?retryWrites=true&w=majority"
+
 
 
 
