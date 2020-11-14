@@ -1,27 +1,36 @@
 const express = require('express')
 const port = process.env.PORT || 3000
-
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:bxzPfHKYklnE1XQS@cluster0.nvx90.mongodb.net/ubicado?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-
-
-
-
 const app = express()
 
-app.get('/', async (req,res) => {
+const mongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://admin:bxzPfHKYklnE1XQS@cluster0.nvx90.mongodb.net/ubicado?retryWrites=true&w=majority";
 
-        client.connect(err => {
-            await client.db("ubicado").collection("users").add({
-                name: 'Jony'
-            })
-            res.send("Inserted")
-            client.close()
-      });
-      
+mongoClient.connect(uri, {}, (error,client) => {
+    if(error){
+        console.log('Failed')
+    }
+
+    const db = client.db('ubicado')
+  
+
+    app.get("/",  (req, res) => {
+        db.collection('users').insertOne({
+            name: 'Henio'
+        }, (error,result) =>{
+            if(error) console.log('Adding failed', error)
+            console.log(result.ops)
+        })
     
-    
+    });
+
 })
 
-app.listen(port)
+
+
+
+
+
+
+
+
+
