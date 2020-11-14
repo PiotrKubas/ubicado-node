@@ -13,9 +13,9 @@ const app = express()
 app.get('/', (req,res) => {
 
         client.connect(err => {
-            const collection = client.db("ubicado").collection("users")
-            res.send(collection)
-            client.close();
+            const collection = client.db("ubicado").collection("users").doc(req.params.id).get()
+            res.send(collection.id)
+            client.close()
       });
       
     
