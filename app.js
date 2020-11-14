@@ -5,10 +5,10 @@ const mongoClient = require('mongodb').MongoClient
 const url = process.env.MONGODB_URI
 
 mongoClient.connect(url, {}, (error, client) =>{
-    if(error)
-        console.log('Cant connect to DB')
-    
-    console.log('Connected to DB')
+    if(error){
+        console.log(error)
+    }
+    else console.log('Connected to DB')
 
 } )
 
