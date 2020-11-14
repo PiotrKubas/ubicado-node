@@ -1,9 +1,14 @@
 const express = require('express')
 const port = process.env.PORT || 3000
-const mongoClient = require('mongodb').MongoClient
 
-const url = "mongodb+srv://admin:bxzPfHKYklnE1XQS@cluster0.nvx90.mongodb.net/Cluster0?retryWrites=true&w=majority"
-
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://admin:bxzPfHKYklnE1XQS@cluster0.nvx90.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 
 
