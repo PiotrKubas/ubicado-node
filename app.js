@@ -4,18 +4,19 @@ const mongoClient = require('mongodb').MongoClient
 
 const url = process.env.MONGODB_URI
 
-mongoClient.connect(url, {}, (error, client) =>{
-    if(error){
-        console.log(error)
-    }
-    else console.log('Connected to DB')
 
-} )
 
 const app = express()
 
 app.get('/', (req,res) => {
-    res.send('tak tak byczku?')
+    mongoClient.connect(url, {}, (error, client) =>{
+        if(error){
+            res.send(error)
+        }
+        else res.send('Connected to DB')
+    
+    } )
+    
 })
 
 app.listen(port)
