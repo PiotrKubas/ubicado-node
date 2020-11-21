@@ -7,9 +7,9 @@ const uri = "mongodb+srv://admin:bxzPfHKYklnE1XQS@cluster0.nvx90.mongodb.net/ubi
 
 mongoClient.connect(uri, {}, (error,client) => {
     if(error){
-        console.log('Failed')
+        client.send('Failed')
     }
-    else console.log('Success')
+    else client.send('Success')
 
     const db = client.db('ubicado')
   
@@ -21,9 +21,9 @@ mongoClient.connect(uri, {}, (error,client) => {
             if(error) console.log('Adding failed', error)
             console.log(result.ops)
         })*/
-    app.get('/users', (req,res) => {
+    app.get('/', (req,res) => {
         db.collection('users').find({}).toArray((error,result) => {
-            console.log(result)
+            res.send(result)
         })
     })
         
