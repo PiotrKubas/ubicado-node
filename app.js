@@ -21,17 +21,15 @@ mongoClient.connect(uri, {}, (error,client) => {
             if(error) console.log('Adding failed', error)
             console.log(result.ops)
         })*/
-    app.get('/', (req,res) => {
+   /* app.get('/', (req,res) => {
         db.collection('users').find({}).toArray((error,result) => {
             res.send(result)
         })
-    })
+    })*/
         
 })
 
-http.listen((process.env.PORT || 3000), function(){
-    console.log('listening on *:5000');
-  });
+app.listen(port)
 
 
 
