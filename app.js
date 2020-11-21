@@ -21,7 +21,7 @@ mongoClient.connect(uri, {}, (error,client) => {
             if(error) console.log('Adding failed', error)
             console.log(result.ops)
         })*/
-    app.get('/', (req,res) => {
+    app.get('/users', (req,res) => {
         db.collection('users').find({}).toArray((error,result) => {
             res.send(result)
         })
