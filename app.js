@@ -1,11 +1,11 @@
 const express = require('express')
 const port = process.env.PORT || 3000
 const app = express()
+require('dotenv/config') 
 
 const mongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:bxzPfHKYklnE1XQS@cluster0.nvx90.mongodb.net/ubicado?retryWrites=true&w=majority";
 
-mongoClient.connect(uri, {}, (error,client) => {
+mongoClient.connect(process.env.DB_CONNECTION, { useNewUrlParser: true}, (error,client) => {
     if(error){
         console.log('Failed')
     }
