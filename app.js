@@ -23,7 +23,7 @@ mongoClient.connect(uri, {}, (error,client) => {
         })*/
     app.get('/users', (req,res) => {
         db.collection('users').find({}).toArray((error,result) => {
-            res.send(result)
+            res.send({users: result})
         })
     })
         
