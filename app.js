@@ -7,9 +7,9 @@ const uri = "mongodb+srv://admin:bxzPfHKYklnE1XQS@cluster0.nvx90.mongodb.net/ubi
 
 mongoClient.connect(uri, {}, (error,client) => {
     if(error){
-        client.send('Failed')
+        console.log('Failed')
     }
-    else client.send('Success')
+    else console.log('Success')
 
     const db = client.db('ubicado')
   
