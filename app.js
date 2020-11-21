@@ -27,11 +27,9 @@ mongoClient.connect(uri, {}, (error,client) => {
         })
     })
         
-    
-    
-
 })
 
+app.listen(port)
 
 
 
