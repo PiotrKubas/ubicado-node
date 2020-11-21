@@ -15,17 +15,7 @@ mongoClient.connect(uri, {}, (error,client) => {
   
 
     
-    /*    db.collection('users').insertOne({
-            name: 'Henio2'
-        }, (error,result) =>{
-            if(error) console.log('Adding failed', error)
-            console.log(result.ops)
-        })*/
-   /* app.get('/', (req,res) => {
-        db.collection('users').find({}).toArray((error,result) => {
-            res.send(result)
-        })
-    })*/
+
         
 })
 
