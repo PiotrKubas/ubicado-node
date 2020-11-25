@@ -3,10 +3,11 @@ const express = require('express')
 const port = process.env.PORT || 3000
 const app = express()
 const authRoute = require('./routes/auth')
+const mongoose = require('mongoose')
 
-const mongoClient = require('mongodb').MongoClient;
+//const mongoClient = require('mongodb').MongoClient;
 
-mongoClient.connect(process.env.DB_CONNECTION, { useNewUrlParser: true}, (error,client) => {
+mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true}, () => {
           console.log('Connected to db')
 })
 
