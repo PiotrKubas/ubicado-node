@@ -11,6 +11,10 @@ const schema = Joi.object({
 router.post('/register', async (req, res) => {
     const {error} = schema.validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
+
+    const emailExist = await User.findOne({email: req.body.email})
+    if(emailExist) return res.status(400).send('Email already used');
+    
     const user = new User({
         name: req.body.name,
         email: req.body.email,
