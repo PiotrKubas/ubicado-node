@@ -8,9 +8,10 @@ router.post('/register', async (req,res) => {
         password: req.body.password
     })
     try {
-        
-    } catch (err) {
-        
+        const savedUser = await user.save();
+        res.send(savedUser);
+    } catch (error) {
+        res.status(400).send(error);
     }
     res.send('Register')
 })
