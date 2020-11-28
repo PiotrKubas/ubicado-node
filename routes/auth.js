@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../model/User');
+const Profile = require('../model/Profile');
 const Joi = require('@hapi/joi');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -32,7 +33,14 @@ router.post('/register', async (req, res) => {
     })
     try {
         const savedUser = await user.save();
-        res.send({userId: user._id});
+        const profile = new Profile({
+            userId: user._id,
+            name: user.name,
+            email: user.email,
+            friends: []
+        })
+        const savedProfile = await profile.save();
+        res.send(savedProfile);
     } catch (error) {
         res.status(400).send(error);
     }
