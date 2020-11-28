@@ -2,7 +2,7 @@ const router = require('express').Router();
 const verify = require('./verifyToken')
 
 router.get('/', verify, (req,res)=> {
-    res.json({profile: 'prof'})
+    res.send(req.user._id)
 })
 
 module.exports = router;
