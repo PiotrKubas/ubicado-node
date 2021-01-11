@@ -8,8 +8,6 @@ router.get('/', verify, async (req,res)=> {
     res.status(200).send(userProfile)
 })
 
-<<<<<<< HEAD
-=======
 router.put('/friends', verify, async (req,res)=> {
     const user = req.user
     const userProfile = await Profile.findOne({userId: user._id})
@@ -30,5 +28,4 @@ router.delete('/friends', verify, async (req,res)=> {
     res.status(200).send(userProfile);
 })
 
->>>>>>> 8838a908acb294ba4237d43b16a6ccc4ecb5ae26
 module.exports = router;
