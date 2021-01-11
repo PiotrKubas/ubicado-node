@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000
 const app = express()
 const authRoute = require('./routes/auth')
 const profileRoute = require('./routes/profile')
+const meetingRoute = require('./routes/meeting')
 const mongoose = require('mongoose')
 
 //const mongoClient = require('mongodb').MongoClient;
@@ -17,6 +18,7 @@ app.use(express.json())
 
 app.use('/user', authRoute)
 app.use('/profile', profileRoute)
+app.use('/meeting', meetingRoute)
 
 app.listen(port)
 
