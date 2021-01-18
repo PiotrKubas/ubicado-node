@@ -32,6 +32,7 @@ router.post('/register', async (req, res) => {
         email: req.body.email,
         password: hashPassword
     })
+    if(req.body.access !== 'Inz$20Z!') return res.status(400).send('Access code incorrect');
     try {
         const savedUser = await user.save();
         const profile = new Profile({
