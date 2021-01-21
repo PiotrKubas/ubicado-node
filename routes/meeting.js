@@ -31,7 +31,7 @@ router.delete('/', verify, async (req,res)=> {
     if(!userMeeting) return res.status(400).send('You do not have any meetings')
     
     await userMeeting.delete()
-    res.status(200).send('Meeting deleted')
+    res.status(200).send({title: ''})
 })
 
 module.exports = router;
