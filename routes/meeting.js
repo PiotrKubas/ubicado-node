@@ -37,13 +37,11 @@ router.get('/friends-meetings', verify, async (req,res)=> {
     const user = req.user
     const userProfile = await Profile.findOne({userId: user._id})
     if(!userProfile) return res.status(400).send('User not found')
-    const meetings = []
-    userProfile.friends.forEach( async (friend) => {
-       const meeting =  await Meeting.findOne({creatorId: friend._id})
-       if(meeting) meetings.push(meeting);
-    });
-     
-    res.status(200).send(meetings)
+    const meetings =  await Promise.all(userProfile.friends.map( async (friend) => {
+       return await Meeting.findOne({creatorName: friend})
+    }));
+    const meetingsToSend = meetings.filter( meeting => meeting !== null)
+    res.status(200).send(meetingsToSend)
 })
 
 
