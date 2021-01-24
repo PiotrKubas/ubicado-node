@@ -38,7 +38,7 @@ router.get('/friends-meetings', verify, async (req,res)=> {
     const userProfile = await Profile.findOne({userId: user._id})
     if(!userProfile) return res.status(400).send('User not found')
     const meetings = []
-    userProfile.friends.forEach(friend => {
+    userProfile.friends.forEach( async (friend) => {
        const meeting =  await Meeting.findOne({creatorId: friend._id})
        if(meeting) meetings.push(meeting);
     });
