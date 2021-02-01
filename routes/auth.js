@@ -19,12 +19,12 @@ const loginSchema = Joi.object({
 
 router.post('/register', async (req, res) => {
     const {error} = registerSchema.validate(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error) return res.status(431).send(error.details[0].message);
 
     const emailExist = await User.findOne({email: req.body.email})
-    if(emailExist) return res.status(400).send('Email already used');
+    if(emailExist) return res.status(432).send('Email already used');
     const nameExist = await User.findOne({name: req.body.name})
-    if(nameExist) return res.status(400).send('Nickname already used');
+    if(nameExist) return res.status(433).send('Nickname already used');
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt)
 
@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
         email: req.body.email,
         password: hashPassword
     })
-    if(req.body.access !== 'Inz$20Z!') return res.status(400).send('Access code incorrect');
+    if(req.body.access !== 'Inz$20Z!') return res.status(434).send('Access code incorrect');
     try {
         const savedUser = await user.save();
         const profile = new Profile({
@@ -51,13 +51,13 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req,res) =>{
     const {error} = loginSchema.validate(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error) return res.status(431).send(error.details[0].message);
 
     const user = await User.findOne({email: req.body.email})
-    if(!user) return res.status(400).send('Account does not exist');
+    if(!user) return res.status(432).send('Account does not exist');
 
     const validPass = await bcrypt.compare(req.body.password, user.password)
-    if(!validPass) return res.status(400).send('Invalid password');
+    if(!validPass) return res.status(433).send('Invalid password');
 
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     //res.header('Bearer', token).send(token);
