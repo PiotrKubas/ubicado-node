@@ -1,3 +1,4 @@
+const { number } = require('@hapi/joi')
 const mongoose = require('mongoose')  
 
 const profileSchema = new mongoose.Schema({
@@ -23,6 +24,10 @@ const profileSchema = new mongoose.Schema({
         type: Array,
         required: true,
     },
+    position : {
+        type: Object,
+        required: false
+    }
      
 })
 

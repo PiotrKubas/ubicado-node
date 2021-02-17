@@ -8,6 +8,14 @@ router.get('/', verify, async (req,res)=> {
     res.status(200).send(userProfile)
 })
 
+router.put('/position', verify, async (req,res)=> {
+    const user = req.user
+    const userProfile = await Profile.findOne({userId: user._id})
+    userProfile.position = req.body
+    await userProfile.save();
+    res.status(200).send(userProfile);
+})
+
 router.put('/friends', verify, async (req,res)=> {
     const user = req.user
     const userProfile = await Profile.findOne({userId: user._id})
