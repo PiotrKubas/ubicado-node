@@ -23,7 +23,7 @@ router.put('/friends', verify, async (req, res) => {
     if (userProfile.friends.find((friend) => friend === req.body.name)) return res.status(400).send('It is already your friend');
     const friendProfile = await Profile.findOne({ name: req.body.name })
     if (!friendProfile) return res.status(401).send('User not found');
-    userProfile.friends.push({name: friendProfile.name, email: friendProfile.email, position: friendProfile.position});
+    userProfile.friends.push({ name: friendProfile.name, email: friendProfile.email });
     await userProfile.save();
     res.status(200).send(userProfile);
 })
@@ -36,6 +36,18 @@ router.delete('/friends', verify, async (req, res) => {
     userProfile.friends = userProfile.friends.filter(friend => friend !== friendToRemove)
     await userProfile.save();
     res.status(200).send(userProfile);
+})
+
+router.get('/friends-positions', verify, async (req, res) => {
+    const user = req.user
+    const userProfile = await Profile.findOne({ userId: user._id })
+    let foundFriend = null
+    const positions = await Promise.all(userProfile.friends.map(async friend => {
+        foundFriend = await Profile.findOne({ name: friend.name })
+        return { name: friend.name, position: foundFriend.position }
+    }))
+    res.status(200).send(positions);
+
 })
 
 module.exports = router;
