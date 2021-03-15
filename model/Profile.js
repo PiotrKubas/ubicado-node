@@ -20,6 +20,18 @@ const profileSchema = new mongoose.Schema({
         min: 6,
         max: 255 
     },
+    fullName: {
+        type: String,
+        required: false,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
+    adress: {
+        type: String,
+        required: false,
+    },
     friends : {
         type: Array,
         required: true,
