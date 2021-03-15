@@ -33,6 +33,10 @@ const meetingSchema = new mongoose.Schema({
         type: Array,
         required: false,
     },
+    position: {
+        type: Object,
+        required: false
+    }
 
 })
 

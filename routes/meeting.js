@@ -18,8 +18,8 @@ router.post('/', verify, async (req, res) => {
     const meeting = new Meeting({
         creatorId: user._id,
         creatorName: userProfile.name,
-        title: req.body.title
-
+        title: req.body.title,
+        position: req.body.position
     })
     await meeting.save()
     res.status(200).send(meeting)
