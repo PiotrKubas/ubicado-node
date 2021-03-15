@@ -1,23 +1,39 @@
-const mongoose = require('mongoose')  
+const mongoose = require('mongoose')
 
 const meetingSchema = new mongoose.Schema({
-    creatorId : {
+    creatorId: {
         type: String,
         required: true,
     },
 
-    creatorName : {
+    creatorName: {
         type: String,
         required: true,
     },
 
-    title : {
+    title: {
         type: String,
         required: true,
         min: 6,
-        max: 255 
-    }
-     
+        max: 255
+    },
+    date: {
+        type: Date,
+        required: false,
+    },
+    address: {
+        type: String,
+        required: false,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
+    reactions: {
+        type: Array,
+        required: false,
+    },
+
 })
 
 

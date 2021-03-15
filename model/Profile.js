@@ -1,24 +1,24 @@
 const { number } = require('@hapi/joi')
-const mongoose = require('mongoose')  
+const mongoose = require('mongoose')
 
 const profileSchema = new mongoose.Schema({
-    userId : {
+    userId: {
         type: String,
         required: true,
     },
 
-    name : {
+    name: {
         type: String,
         required: true,
         min: 6,
-        max: 255 
+        max: 255
     },
-    
-    email : {
+
+    email: {
         type: String,
         required: true,
         min: 6,
-        max: 255 
+        max: 255
     },
     fullName: {
         type: String,
@@ -28,19 +28,19 @@ const profileSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    adress: {
+    address: {
         type: String,
         required: false,
     },
-    friends : {
+    friends: {
         type: Array,
         required: true,
     },
-    position : {
+    position: {
         type: Object,
         required: false
     }
-     
+
 })
 
 
