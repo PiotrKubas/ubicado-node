@@ -33,7 +33,9 @@ router.put('/friends', verify, async (req, res) => {
     if (userProfile.friends.find((friend) => friend === req.body.name)) return res.status(400).send('It is already your friend');
     const friendProfile = await Profile.findOne({ name: req.body.name })
     if (!friendProfile) return res.status(401).send('User not found');
-    userProfile.friends.push({ name: friendProfile.name, email: friendProfile.email });
+    userProfile.friends.push(
+        { name: friendProfile.name, email: friendProfile.email, fullName: friendProfile.fullName, description: friendProfile.description, address: friendProfile.address }
+    );
     await userProfile.save();
     res.status(200).send(userProfile);
 })
