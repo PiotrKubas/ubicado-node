@@ -12,12 +12,13 @@ router.get('/', verify, async (req, res) => {
 router.post('/', verify, async (req, res) => {
     const user = req.user
     const userMeeting = await Meeting.findOne({ creatorId: user._id })
-    if (userMeeting) return res.status(400).send('You already have an active meeting')
+    if (userMeeting) return res.status(401).send('You already have an active meeting')
     const userProfile = await Profile.findOne({ userId: user._id })
 
     const meeting = new Meeting({
         creatorId: user._id,
         creatorName: userProfile.name,
+        date: req.body.date,
         title: req.body.title,
         position: req.body.position
     })
