@@ -21,6 +21,7 @@ router.post('/', verify, async (req, res) => {
         date: req.body.date,
         title: req.body.title,
         description: req.body.description,
+        address: req.body.address,
         position: req.body.position
     })
     await meeting.save()
