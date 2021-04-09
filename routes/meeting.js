@@ -20,6 +20,7 @@ router.post('/', verify, async (req, res) => {
         creatorName: userProfile.name,
         date: req.body.date,
         title: req.body.title,
+        description: req.body.description,
         position: req.body.position
     })
     await meeting.save()
