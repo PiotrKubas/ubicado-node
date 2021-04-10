@@ -22,7 +22,8 @@ router.post('/', verify, async (req, res) => {
         title: req.body.title,
         description: req.body.description,
         address: req.body.address,
-        position: req.body.position
+        position: req.body.position,
+        reactions: [{ name: userProfile.name, isComing: true }]
     })
     await meeting.save()
     res.status(200).send(meeting)
