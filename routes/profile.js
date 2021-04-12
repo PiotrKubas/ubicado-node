@@ -45,7 +45,7 @@ router.delete('/friends', verify, async (req, res) => {
     const userProfile = await Profile.findOne({ userId: user._id })
     const friendToRemove = userProfile.friends.find(friend => friend.name === req.body.name)
     if (!friendToRemove) return res.status(400).send('User not found');
-    userProfile.friends = userProfile.friends.filter(friend => friend.name !== friendToRemove)
+    userProfile.friends = userProfile.friends.filter(friend => friend.name !== friendToRemove.name)
     await userProfile.save();
     res.status(200).send(userProfile);
 })
