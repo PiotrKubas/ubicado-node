@@ -60,11 +60,15 @@ router.put('/update', verify, async (req, res) => {
 })
 router.put('/reactions', verify, async (req, res) => {
     const user = req.user
+    const userProfile = await Profile.findOne({ userId: user._id })
     const friendMeeting = await Meeting.findOne({ creatorName: req.body.creator })
     if (!friendMeeting) return res.status(400).send('Meeting not found')
     friendMeeting.reactions = friendMeeting.reactions.filter(reaction => reaction.name !== req.body.name);
     friendMeeting.reactions.push({ name: req.body.name, isComing: req.body.isComing })
     await friendMeeting.save();
+    userProfile.history = userProfile.history.filter(item => item.creatorName !== req.body.creator && item.date !== req.body.date);
+    if (req.body.isComing) userProfile.history.push({ title: req.body.title, creatorName: req.body.creator, date: req.body.date });
+    await userProfile.save();
     res.status(200).send(friendMeeting);
 })
 

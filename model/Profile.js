@@ -36,6 +36,10 @@ const profileSchema = new mongoose.Schema({
         type: Array,
         required: true,
     },
+    history: {
+        type: Array,
+        required: false,
+    },
     position: {
         type: Object,
         required: false
