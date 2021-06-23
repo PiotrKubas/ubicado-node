@@ -14,7 +14,7 @@ router.put('/position', verify, async (req, res) => {
     const date = new Date()
     userProfile.position = { ...req.body, date }
     await userProfile.save();
-    res.status(200).send(userProfile);
+    res.status(200).send(userProfile.position);
 })
 
 router.put('/update', verify, async (req, res) => {
