@@ -5,7 +5,11 @@ const Profile = require('../model/Profile');
 router.get('/', verify, async (req, res) => {
     const user = req.user
     const userProfile = await Profile.findOne({ userId: user._id })
-    res.status(200).send(userProfile)
+    const friends = await Promise.all(userProfile.friends.map(async friend => {
+        foundFriend = await Profile.findOne({ name: friend.name })
+        return { name: friendProfile.name, email: friendProfile.email, fullName: friendProfile.fullName, description: friendProfile.description, address: friendProfile.address } 
+    }))
+    res.status(200).send({...userProfile, friends})
 })
 
 router.put('/position', verify, async (req, res) => {
@@ -24,7 +28,11 @@ router.put('/update', verify, async (req, res) => {
     userProfile.address = req.body.address;
     userProfile.fullName = req.body.fullName;
     await userProfile.save();
-    res.status(200).send(userProfile);
+    const friends = await Promise.all(userProfile.friends.map(async friend => {
+        foundFriend = await Profile.findOne({ name: friend.name })
+        return { name: friendProfile.name, email: friendProfile.email, fullName: friendProfile.fullName, description: friendProfile.description, address: friendProfile.address } 
+    }))
+    res.status(200).send({...userProfile, friends});
 })
 
 router.put('/friends', verify, async (req, res) => {
@@ -34,10 +42,14 @@ router.put('/friends', verify, async (req, res) => {
     const friendProfile = await Profile.findOne({ name: req.body.name })
     if (!friendProfile) return res.status(401).send('User not found');
     userProfile.friends.push(
-        { name: friendProfile.name, email: friendProfile.email, fullName: friendProfile.fullName, description: friendProfile.description, address: friendProfile.address }
+        { name: friendProfile.name}
     );
     await userProfile.save();
-    res.status(200).send(userProfile);
+    const friends = await Promise.all(userProfile.friends.map(async friend => {
+        foundFriend = await Profile.findOne({ name: friend.name })
+        return { name: friendProfile.name, email: friendProfile.email, fullName: friendProfile.fullName, description: friendProfile.description, address: friendProfile.address } 
+    }))
+    res.status(200).send({...userProfile, friends});
 })
 
 router.delete('/friends', verify, async (req, res) => {
@@ -47,7 +59,11 @@ router.delete('/friends', verify, async (req, res) => {
     if (!friendToRemove) return res.status(400).send('User not found');
     userProfile.friends = userProfile.friends.filter(friend => friend.name !== friendToRemove.name)
     await userProfile.save();
-    res.status(200).send(userProfile);
+    const friends = await Promise.all(userProfile.friends.map(async friend => {
+        foundFriend = await Profile.findOne({ name: friend.name })
+        return { name: friendProfile.name, email: friendProfile.email, fullName: friendProfile.fullName, description: friendProfile.description, address: friendProfile.address } 
+    }))
+    res.status(200).send({...userProfile, friends});
 })
 
 router.get('/friends-positions', verify, async (req, res) => {
